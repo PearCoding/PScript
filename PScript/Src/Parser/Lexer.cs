@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PScript.Internal
+namespace PScript.Parser
 {
     internal class Lexer
     {

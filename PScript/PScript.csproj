@@ -43,11 +43,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\Error.cs" />
-    <Compile Include="Src\Internal\Statements.cs" />
-    <Compile Include="Src\Internal\Lexer.cs" />
-    <Compile Include="Src\Internal\Parser.cs" />
-    <Compile Include="Src\Internal\SyntaxTree.cs" />
-    <Compile Include="Src\Internal\Token.cs" />
+    <Compile Include="Src\Parser\Expressions.cs" />
+    <Compile Include="Src\Parser\Statements.cs" />
+    <Compile Include="Src\Parser\Lexer.cs" />
+    <Compile Include="Src\Parser\Parser.cs" />
+    <Compile Include="Src\Parser\SyntaxTree.cs" />
+    <Compile Include="Src\Parser\Token.cs" />
     <Compile Include="Src\Logger.cs" />
     <Compile Include="Src\PScript.cs" />
   </ItemGroup>

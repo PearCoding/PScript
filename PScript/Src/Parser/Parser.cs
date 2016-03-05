@@ -31,7 +31,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace PScript.Internal
+namespace PScript.Parser
 {
     internal class Parser
     {

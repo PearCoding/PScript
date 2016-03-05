@@ -9,7 +9,7 @@ namespace_list:	IDENTIFIER '.' namespace_list
 
 # FUNCTIONS
 func_stmt:	func_header ';'
-			| func_header func_body
+			| func_header compound
 
 func_header:	'function' IDENTIFIER '(' func_params ')'
 
@@ -25,8 +25,6 @@ func_params_list_def:	IDENTIFIER
 						
 func_params_list:	IDENTIFIER
 					| func_params_list ',' IDENTIFIER
-					
-func_body: compound
 
 # STATEMENTS
 compound:	'{' statement_list '}'
@@ -61,17 +59,16 @@ case_line:	'case' const_expr ':' statement_list
 			| 'default' ':' statement_list
 			
 itr_stmt:	'for' '(' IDENTIFIER 'in' expr ')' compound
-			| 'for' '(' var_expr ';' cond_expr ';' expr_stmt ')' compound
+			| 'for' '(' [decl_expr] ';' [cond_expr] ';' [expr_stmt] ')' compound
 			| 'while' '(' cond_expr ')' compound
 			| 'do' compound 'while' '(' cond_expr ')' ';'
 			
 jmp_stmt:	'break' ';'
 			| 'continue' ';'
-			| 'return' expr_list ';'
-			| 'return' ';'
+			| 'return' [expr_list] ';'
 
 # EXPRESSIONS
-decl_expr:	IDENTIFIER ass_op cond_expr
+decl_expr:	IDENTIFIER '=' cond_expr
 
 const_expr:	cond_expr
 
@@ -130,14 +127,7 @@ mul_expr:	unary_expr
 			
 unary_expr:	postfix_expr
 			| unary_op unary_expr
-
-unary_op:	'++'
-			| '--'
-			| '+'
-			| '-'
-			| '!'
-			| '~'
-			
+		
 postfix_expr:	primary_expr
 				| postfix_expr '--'
 				| postfix_expr '++'
@@ -148,14 +138,34 @@ postfix_expr:	primary_expr
 				| postfix_expr '.' postfix_expr
 				
 primary_expr:	literal
-				| IDENTIFIER
 				| '(' expr ')'
-				| '[' expr_list ']'
-				| '[' ']'
-				
+				| '[' [expr_list] ']'
+
+# Other things				
 literal:	INTEGER
 			| FLOAT
 			| STRING
+			| IDENTIFIER
 			| 'true'
 			| 'false'
 			| 'null'
+			
+unary_op:	'++'
+			| '--'
+			| '+'
+			| '-'
+			| '!'
+			| '~'
+			
+ass_op:		'='
+			| '<<='
+			| '>>='
+			| '+='
+			| '-='
+			| '*='
+			| '**='
+			| '/='
+			| '%='
+			| '&='
+			| '^='
+			| '|='

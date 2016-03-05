@@ -30,80 +30,15 @@
 
 using System.Collections.Generic;
 
-namespace PScript.Internal
+namespace PScript.Parser
 {
-    internal enum StatementType
+    internal class SyntaxTree
     {
-        Expression,
-        Declaration,
-        If,
-        Switch,
-        ForEach,
-        For,
-        While,
-        DoWhile,
-        Break,
-        Continue,
-        Return,
-        Function,
-        Import,
+        public List<Statement> Statements; 
     }
 
-    internal class Statement
+    internal class Compound
     {
-        protected StatementType _Type;
-        public StatementType Type { get { return _Type; } }
+        public List<Statement> Statements;
     }
-
-    internal class ExpressionStatement : Statement
-    {
-        public Expression Expression;
-
-        public ExpressionStatement(Expression expr)
-        {
-            _Type = StatementType.Expression;
-            Expression = expr;
-        }
-    }
-
-    internal class DeclarationStatement : Statement
-    {
-        public DeclarationExpression Expression;
-
-        public DeclarationStatement(DeclarationExpression expr)
-        {
-            _Type = StatementType.Declaration;
-            Expression = expr;
-        }
-    }
-
-    internal class IfStatement : Statement
-    {
-        public ConditionalExpression Condition;
-
-        // Never both
-        public IfStatement ElseIf;
-        public Compound Else;
-
-        public IfStatement(ConditionalExpression cond)
-        {
-            _Type = StatementType.If;
-            Condition = cond;
-        }
-    }
-
-    internal class SwitchStatement : Statement
-    {
-        public Expression Expression;
-        public List<CaseLine> Cases;
-        public Compound DefaultCase;
-
-        public SwitchStatement(Expression expr)
-        {
-            _Type = StatementType.Switch;
-            Expression = expr;
-        }
-    }
-
-
 }
