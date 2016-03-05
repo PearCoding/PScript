@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PScript", "PScript\PScript.csproj", "{E48587AB-94C6-44F9-803A-4F6D4150A5DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PInterpreter", "PInterpreter\PInterpreter.csproj", "{A2F74292-500D-488B-B118-329914281BAA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E48587AB-94C6-44F9-803A-4F6D4150A5DE} = {E48587AB-94C6-44F9-803A-4F6D4150A5DE}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E48587AB-94C6-44F9-803A-4F6D4150A5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E48587AB-94C6-44F9-803A-4F6D4150A5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E48587AB-94C6-44F9-803A-4F6D4150A5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E48587AB-94C6-44F9-803A-4F6D4150A5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F74292-500D-488B-B118-329914281BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F74292-500D-488B-B118-329914281BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F74292-500D-488B-B118-329914281BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F74292-500D-488B-B118-329914281BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

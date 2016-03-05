@@ -1,0 +1,161 @@
+translation_unit: 	statement_list
+
+# NAMESPACES/MODULES			
+import_stmt:	'import' namespace_list ';'
+
+namespace_list:	IDENTIFIER '.' namespace_list
+				| IDENTIFIER
+				| MULTIPLY
+
+# FUNCTIONS
+func_stmt:	func_header ';'
+			| func_header func_body
+
+func_header:	'function' IDENTIFIER '(' func_params ')'
+
+func_params:	/* EMPTY */
+				| func_params_list_def
+				| func_params_list ',' '...'
+				| '...'
+				
+func_params_list_def:	IDENTIFIER
+						| IDENTIFIER '=' const_expr
+						| func_params_list ',' IDENTIFIER
+						| func_params_list_def ',' IDENTIFIER '=' const_expr
+						
+func_params_list:	IDENTIFIER
+					| func_params_list ',' IDENTIFIER
+					
+func_body: compound
+
+# STATEMENTS
+compound:	'{' statement_list '}'
+
+statement_list:	/* EMPTY */
+				| statement
+				| statement statement_list
+
+statement:	expr_stmt
+			| decl_stmt
+			| cond_stmt
+			| itr_stmt
+			| jmp_stmt
+			| import_stmt
+			| func_stmt
+
+decl_stmt:	decl_expr ';'
+
+cond_stmt:	if_stmt
+			| switch_stmt
+			
+if_stmt:	'if' '(' cond_expr ')' compound
+			| if_stmt 'else' if_stmt
+			| if_stmt 'else' compound
+
+switch_stmt:	'switch' '(' expr ')' '{' case_list '}'
+
+case_list:	case_line
+			| case_line case_list
+
+case_line:	'case' const_expr ':' statement_list
+			| 'default' ':' statement_list
+			
+itr_stmt:	'for' '(' IDENTIFIER 'in' expr ')' compound
+			| 'for' '(' var_expr ';' cond_expr ';' expr_stmt ')' compound
+			| 'while' '(' cond_expr ')' compound
+			| 'do' compound 'while' '(' cond_expr ')' ';'
+			
+jmp_stmt:	'break' ';'
+			| 'continue' ';'
+			| 'return' expr_list ';'
+			| 'return' ';'
+
+# EXPRESSIONS
+decl_expr:	IDENTIFIER ass_op cond_expr
+
+const_expr:	cond_expr
+
+expr:		ass_expr
+
+expr_opt:	/* EMPTY */
+			| expr
+
+expr_list:	expr
+			| expr ',' expr_list
+
+ass_expr:	cond_expr
+			| log_or_expr ass_op cond_expr
+			
+cond_expr:	log_or_expr
+			| log_or_expr '?' expr ':' ass_expr
+			
+log_or_expr:	log_and_expr
+				| log_or_expr '||' log_and_expr
+			
+log_and_expr:	bin_or_expr
+				| log_and_expr '&&' bin_or_expr
+				
+bin_or_expr:	bin_xor_expr
+				| bin_or_expr '|' bin_xor_expr
+
+bin_xor_expr:	bin_and_expr
+				| bin_xor_expr '^' bin_and_expr
+				
+bin_and_expr:	eq_expr
+				| bin_and_expr '&' eq_expr
+
+eq_expr:	rel_expr
+			| eq_expr '==' rel_expr
+			| eq_expr '!=' rel_expr
+			
+rel_expr:	shift_expr
+			| rel_expr '<' shift_expr
+			| rel_expr '>' shift_expr
+			| rel_expr '<=' shift_expr
+			| rel_expr '>=' shift_expr
+			
+shift_expr:	add_expr
+			| shift_expr '<<' add_expr
+			| shift_expr '>>' add_expr
+	
+add_expr:	mul_expr
+			| add_expr '+' mul_expr
+			| add_expr '-' mul_expr
+			
+mul_expr:	unary_expr
+			| mul_expr '*' unary_expr
+			| mul_expr '/' unary_expr
+			| mul_expr '%' unary_expr
+			| mul_expr '**' unary_expr
+			
+unary_expr:	postfix_expr
+			| unary_op unary_expr
+
+unary_op:	'++'
+			| '--'
+			| '+'
+			| '-'
+			| '!'
+			| '~'
+			
+postfix_expr:	primary_expr
+				| postfix_expr '--'
+				| postfix_expr '++'
+				| postfix_expr '[' expr ']'
+				| postfix_expr '[' ']'
+				| postfix_expr '(' expr ')'
+				| postfix_expr '(' ')'
+				| postfix_expr '.' postfix_expr
+				
+primary_expr:	literal
+				| IDENTIFIER
+				| '(' expr ')'
+				| '[' expr_list ']'
+				| '[' ']'
+				
+literal:	INTEGER
+			| FLOAT
+			| STRING
+			| 'true'
+			| 'false'
+			| 'null'
