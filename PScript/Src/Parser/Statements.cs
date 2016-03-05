@@ -66,29 +66,20 @@ namespace PScript.Parser
         }
     }
 
-    internal class DeclarationStatement : Statement
-    {
-        public DeclarationExpression Expression;
-
-        public DeclarationStatement(DeclarationExpression expr)
-        {
-            _Type = StatementType.Declaration;
-            Expression = expr;
-        }
-    }
-
     internal class IfStatement : Statement
     {
         public Expression Condition;
+        public Compound Body;
 
         // Never both
         public IfStatement ElseIf;
-        public Compound Else;
+        public Compound ElseBody;
 
-        public IfStatement(Expression cond)
+        public IfStatement(Expression cond, Compound body)
         {
             _Type = StatementType.If;
             Condition = cond;
+            Body = body;
         }
     }
 
@@ -134,12 +125,12 @@ namespace PScript.Parser
 
     internal class ForStatement : Statement
     {
-        public DeclarationExpression Declaration;
+        public Expression Declaration;
         public Expression Condition;
         public Expression NextExpr;
         public Compound Body;
 
-        public ForStatement(DeclarationExpression decl, Expression cond, Expression next, Compound body)
+        public ForStatement(Expression decl, Expression cond, Expression next, Compound body)
         {
             _Type = StatementType.For;
             Declaration = decl;
@@ -169,7 +160,7 @@ namespace PScript.Parser
 
         public DoWhileStatement(Expression cond, Compound body)
         {
-            _Type = StatementType.While;
+            _Type = StatementType.DoWhile;
             Condition = cond;
             Body = body;
         }

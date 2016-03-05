@@ -34,6 +34,7 @@ namespace PScript.Parser
 {
     internal enum ExpressionType
     {
+        Nothing,
         Condition,
         Call,
         ArrayAccess,
@@ -85,6 +86,11 @@ namespace PScript.Parser
         public ExpressionType Type;
         public Expression[] Expressions;
         public Literal Literal;
+
+        public Expression()
+        {
+            Type = ExpressionType.Nothing;
+        }
 
         public Expression(ExpressionType type, Literal literal)
         {

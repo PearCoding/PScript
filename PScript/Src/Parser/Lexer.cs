@@ -386,11 +386,17 @@ namespace PScript.Parser
             }
         }
 
-        public Token Look()
+        public Token Look(int i = 1)
         {
+            if (i < 1)
+                throw new Error(ErrorType.Internal_LookParamLessOne);
+
             int pos = _Position;
             int line = _Line;
             int col = _Column;
+
+            while(--i > 0)
+                Next();
 
             Token t = Next();
 

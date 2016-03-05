@@ -34,7 +34,7 @@ namespace PScript.Parser
 {
     internal class SyntaxTree
     {
-        public List<Statement> Statements; 
+        public Compound Statements; 
     }
 
     internal class Compound

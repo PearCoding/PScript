@@ -38,7 +38,14 @@ namespace PScript
         Lexer_InvalidOperator,
         Lexer_UnknownIdentifier,
         Lexer_UnknownCharacter,
-        Parser_WrongToken
+        Parser_WrongToken,
+        Parser_EllipsesInvalidCount,
+        Parser_EllipsesNotLast,
+        Parser_NonDefaultAfterDefault,
+        Parser_EntryAfterAllAccess,
+        Internal_LookParamLessOne,
+        Parser_MultipleDefaults,
+        Parser_ConditionAssignmentStatementMixed
     }
 
     public class Error : Exception

@@ -34,14 +34,11 @@ statement_list:	/* EMPTY */
 				| statement statement_list
 
 statement:	expr_stmt
-			| decl_stmt
 			| cond_stmt
 			| itr_stmt
 			| jmp_stmt
 			| import_stmt
 			| func_stmt
-
-decl_stmt:	decl_expr ';'
 
 cond_stmt:	if_stmt
 			| switch_stmt
@@ -59,7 +56,7 @@ case_line:	'case' const_expr ':' statement_list
 			| 'default' ':' statement_list
 			
 itr_stmt:	'for' '(' IDENTIFIER 'in' expr ')' compound
-			| 'for' '(' [decl_expr] ';' [cond_expr] ';' [expr_stmt] ')' compound
+			| 'for' '(' [ass_expr] ';' [cond_expr] ';' [expr] ')' compound
 			| 'while' '(' cond_expr ')' compound
 			| 'do' compound 'while' '(' cond_expr ')' ';'
 			
@@ -67,15 +64,12 @@ jmp_stmt:	'break' ';'
 			| 'continue' ';'
 			| 'return' [expr_list] ';'
 
-# EXPRESSIONS
-decl_expr:	IDENTIFIER '=' cond_expr
+expr_stmt:	[expr] ';'
 
+# EXPRESSIONS
 const_expr:	cond_expr
 
 expr:		ass_expr
-
-expr_opt:	/* EMPTY */
-			| expr
 
 expr_list:	expr
 			| expr ',' expr_list

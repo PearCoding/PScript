@@ -66,15 +66,5 @@ namespace pinterpreter
             else if (level == LogLevel.Error || level == LogLevel.Fatal)
                 _ErrorCount++;
         }
-
-        public override void Log(ErrorType type)
-        {
-            Log(LogLevel.Debug, type.ToString());//TODO
-        }
-
-        public override void Log(int line, int column, ParseErrorType type)
-        {
-            Log(line, column, LogLevel.Debug, type.ToString());//TODO
-        }
     }
 }
