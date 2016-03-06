@@ -44,6 +44,7 @@ namespace PScript.Parser
         Function,
         Return,
         Var,
+        Ref,
         For,
         While,
         Do,

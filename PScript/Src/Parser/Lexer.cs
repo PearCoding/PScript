@@ -42,6 +42,7 @@ namespace PScript.Parser
             new KeyValuePair<string, TokenType>("return", TokenType.Return),
             new KeyValuePair<string, TokenType>("const", TokenType.Const),
             new KeyValuePair<string, TokenType>("var", TokenType.Var),
+            new KeyValuePair<string, TokenType>("ref", TokenType.Ref),
             new KeyValuePair<string, TokenType>("for", TokenType.For),
             new KeyValuePair<string, TokenType>("while", TokenType.While),
             new KeyValuePair<string, TokenType>("do", TokenType.Do),
