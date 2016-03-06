@@ -109,11 +109,13 @@ namespace PScript.Parser
     {
         public string Name;
         public Expression Expression;
+        public bool IsConst;
 
-        public DeclarationExpression(string name, Expression expr)
+        public DeclarationExpression(string name, Expression expr, bool isConst)
         {
             Name = name;
             Expression = expr;
+            IsConst = isConst;
         }
     }
 

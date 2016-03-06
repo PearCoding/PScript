@@ -66,6 +66,17 @@ namespace PScript.Parser
         }
     }
 
+    internal class DeclarationStatement : Statement
+    {
+        public DeclarationExpression Expression;
+
+        public DeclarationStatement(DeclarationExpression expr)
+        {
+            _Type = StatementType.Declaration;
+            Expression = expr;
+        }
+    }
+
     internal class IfStatement : Statement
     {
         public Expression Condition;
@@ -125,12 +136,12 @@ namespace PScript.Parser
 
     internal class ForStatement : Statement
     {
-        public Expression Declaration;
+        public DeclarationExpression Declaration;
         public Expression Condition;
         public Expression NextExpr;
         public Compound Body;
 
-        public ForStatement(Expression decl, Expression cond, Expression next, Compound body)
+        public ForStatement(DeclarationExpression decl, Expression cond, Expression next, Compound body)
         {
             _Type = StatementType.For;
             Declaration = decl;

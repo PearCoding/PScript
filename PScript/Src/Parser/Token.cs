@@ -43,6 +43,7 @@ namespace PScript.Parser
         Import,
         Function,
         Return,
+        Var,
         For,
         While,
         Do,

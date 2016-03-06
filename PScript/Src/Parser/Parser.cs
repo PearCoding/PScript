@@ -104,6 +104,8 @@ namespace PScript.Parser
             }
             else if (Lookahead(TokenType.Return))
                 return gr_return_stmt();
+            else if (Lookahead(TokenType.Var) || Lookahead(TokenType.Const))
+                return gr_decl_stmt();
             else if (Lookahead(TokenType.For))
                 return gr_for_stmt();
             else if (Lookahead(TokenType.While))
@@ -218,6 +220,13 @@ namespace PScript.Parser
             return stmt;
         }
 
+        Statement gr_decl_stmt()
+        {
+            Statement stmt = new DeclarationStatement(gr_decl_expr());
+            Match(TokenType.Semicolon);
+            return stmt;
+        }
+
         // Jump Statements
         Statement gr_return_stmt()
         {
@@ -243,9 +252,9 @@ namespace PScript.Parser
             }
             else
             {
-                Expression decl = null;
+                DeclarationExpression decl = null;
                 if (!Lookahead(TokenType.Semicolon))
-                    decl = gr_ass_expr();
+                    decl = gr_decl_expr();
                 Match(TokenType.Semicolon);
 
                 Expression cond = null;
@@ -383,6 +392,20 @@ namespace PScript.Parser
         Expression gr_expr()
         {
             return gr_ass_expr();
+        }
+
+        DeclarationExpression gr_decl_expr()
+        {
+            bool isConst = false;
+            if (Lookahead(TokenType.Const))
+            {
+                Match(TokenType.Const);
+                isConst = true;
+            }
+            Match(TokenType.Var);
+            Token name = Match(TokenType.String);
+            Match(TokenType.Assign);
+            return new DeclarationExpression(name.Value, gr_expr(), isConst);
         }
 
         Expression gr_ass_expr()
